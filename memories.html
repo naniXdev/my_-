@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Memories</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: radial-gradient(circle at center, #3d000b 0%, #120003 100%);
+        padding-bottom: 100px;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .heart-wrapper {
+        position: relative;
+        width: 95vw;
+        max-width: 600px;
+        aspect-ratio: 1 / 1;
+        margin: 40px auto;
+      }
+
+      .photo {
+        position: absolute;
+      }
+
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        display: block;
+        border-radius: 3px;
+      }
+
+      /* --- THE TARGET (T) --- */
+      .target-t {
+        left: 30%;
+        top: 36%;
+        width: 40%;
+        height: 40%;
+        z-index: 100;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .target-t img {
+        border-radius: 15px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
+      }
+
+      /* --- DECORATIONS WITH NEW ADJUSTED SWAPS --- */
+
+      /* Top Left Loop */
+      .q33 {
+        left: 20%;
+        top: 6%;
+        width: 18%;
+        height: 18%;
+      }
+      .q3 {
+        left: 62%;
+        top: 22%;
+        width: 16%;
+        height: 16%;
+      }
+      .qw {
+        left: 22%;
+        top: 22%;
+        width: 16%;
+        height: 16%;
+      }
+
+      /* Top Right Loop */
+      .q8 {
+        left: 62%;
+        top: 6%;
+        width: 18%;
+        height: 18%;
+      }
+      .q88 {
+        left: 77%;
+        top: 18%;
+        width: 18%;
+        height: 18%;
+      }
+      .q5 {
+        left: 5%;
+        top: 18%;
+        width: 18%;
+        height: 18%;
+      }
+
+      /* Center Top Dip */
+      .q22 {
+        left: 41%;
+        top: 14%;
+        width: 18%;
+        height: 18%;
+      }
+
+      /* Middle Sides */
+      .q7 {
+        left: 2%;
+        top: 38%;
+        width: 18%;
+        height: 18%;
+      }
+      .q77 {
+        left: 80%;
+        top: 38%;
+        width: 18%;
+        height: 18%;
+      } /* Swapped here via q66 step */
+
+      /* Lower V-Shape */
+      .q4 {
+        left: 8%;
+        top: 58%;
+        width: 18%;
+        height: 18%;
+      }
+      .q11 {
+        left: 20%;
+        top: 74%;
+        width: 18%;
+        height: 18%;
+      }
+
+      .q66 {
+        left: 74%;
+        top: 58%;
+        width: 18%;
+        height: 18%;
+      } /* Takes old q2 spot */
+      .q2 {
+        left: 62%;
+        top: 74%;
+        width: 18%;
+        height: 18%;
+      } /* Takes old q77 spot */
+
+      /* Bottom Tip */
+      .q99 {
+        left: 41%;
+        top: 82%;
+        width: 18%;
+        height: 18%;
+      }
+
+      @media (min-width: 768px) {
+        .heart-wrapper {
+          max-width: 850px;
+        }
+      }
+
+      #finalBtn {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 14px 45px;
+        border: none;
+        border-radius: 50px;
+        background: #c9a227;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heart-wrapper">
+      <div class="photo q33"><img src="image/q33.png" /></div>
+      <div class="photo q3"><img src="image/q3.png" /></div>
+      <div class="photo qw"><img src="image/qw.png" /></div>
+      <div class="photo q7"><img src="image/q7.png" /></div>
+      <div class="photo q4"><img src="image/q4.png" /></div>
+      <div class="photo q11"><img src="image/q11.png" /></div>
+      <div class="photo q22"><img src="image/q22.png" /></div>
+      <div class="photo q99"><img src="image/q99.png" /></div>
+      <div class="photo q77"><img src="image/q77.png" /></div>
+      <div class="photo q66"><img src="image/q66.png" /></div>
+      <div class="photo q5"><img src="image/q5.png" /></div>
+      <div class="photo q2"><img src="image/q2.png" /></div>
+      <div class="photo q88"><img src="image/q88.png" /></div>
+      <div class="photo q8"><img src="image/q8.png" /></div>
+
+      <div class="photo target-t"><img src="image/t.jpg" /></div>
+    </div>
+
+    <button id="finalBtn" onclick="window.location.href = 'beat.html'">
+      Next ❤️
+    </button>
+  </body>
+</html>

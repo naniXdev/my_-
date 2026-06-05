@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:
+          radial-gradient(white, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+          radial-gradient(
+            white,
+            rgba(255, 255, 255, 0.15) 1px,
+            transparent 1px
+          ),
+          linear-gradient(to bottom, #050814, #120b30);
+        background-size:
+          50px 50px,
+          80px 80px,
+          100% 100%;
+        /* Twinkling effect: move stars slowly */
+        animation: twinkle 10s linear infinite;
+      }
+
+      @keyframes twinkle {
+        from {
+          background-position:
+            0 0,
+            40px 40px,
+            0 0;
+        }
+        to {
+          background-position:
+            50px 50px,
+            120px 120px,
+            0 0;
+        }
+      }
+
+      .message {
+        color: #ffd6ff;
+        font-family: "Arial Black", sans-serif;
+        font-size: 28px;
+        text-align: center;
+        text-shadow:
+          0 0 15px #ffd6ff,
+          0 0 30px #ff7ac6;
+        /* Breathing animation for the text */
+        animation: breathe 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes breathe {
+        from {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        to {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="message">
+      Congrats, You're Even More Ancient Now. muhehehehehe 😈💀😏
+    </div>
+  </body>
+</html>

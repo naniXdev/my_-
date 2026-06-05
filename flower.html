@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flower Opening</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        background: #fff5f8;
+        position: relative;
+      }
+
+      /* Ensuring the iframe is ready to be interacted with */
+      #lovePage {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        clip-path: inset(0 0 100% 0);
+        opacity: 0; /* Start hidden */
+        transition:
+          clip-path 9s linear,
+          opacity 2s ease;
+        z-index: 500;
+      }
+
+      /* Once the letter is clicked, we boost the iframe z-index */
+      #lovePage.active {
+        z-index: 2000;
+        opacity: 1;
+      }
+
+      .letter {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 900;
+        transform: translate(-50%, -50%);
+        font-size: clamp(60px, 15vw, 120px);
+        opacity: 0;
+        transition: all 1.5s ease;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .letter.show {
+        opacity: 1;
+      }
+
+      #flowers {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .flower {
+        position: absolute;
+        width: min(30vw, 250px);
+        height: auto;
+        transition:
+          transform 4s ease,
+          opacity 4s ease;
+      }
+
+      .teddy {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 85vw;
+        max-width: 600px;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+        opacity: 1;
+        transition:
+          transform 6s cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 6s ease;
+        pointer-events: none; /* Prevents teddy from blocking clicks */
+      }
+
+      @keyframes teddyImpact {
+        0% {
+          transform: translate(-50%, -50%) scale(0.3);
+          opacity: 0;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes teddySlide {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+          transform: translate(-50%, 150vh) scale(0.98);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .flower {
+          width: min(40vw, 180px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="flowers"></div>
+    <iframe src="love.html" id="lovePage"></iframe>
+    <div class="letter" id="letter">💌</div>
+
+    <script>
+      const flowersContainer = document.getElementById("flowers");
+      const flowerImages = [
+        "image/pp1.png",
+        "image/pp2.png",
+        "image/pp3.png",
+        "image/pp4.png",
+      ];
+
+      // 1. Generate Flowers
+      for (let i = 0; i < 250; i++) {
+        const flower = document.createElement("img");
+        flower.src =
+          flowerImages[Math.floor(Math.random() * flowerImages.length)];
+        flower.classList.add("flower");
+        flower.style.left = `${Math.random() * 120 - 10}%`;
+        flower.style.top = `${Math.random() * 120 - 10}%`;
+        flowersContainer.appendChild(flower);
+      }
+
+      // 2. Explode Flowers
+      setTimeout(() => {
+        document.querySelectorAll(".flower").forEach((flower) => {
+          const direction = Math.random() > 0.5 ? 1 : -1;
+          flower.style.transform = `translateX(${direction * 110}vw) rotate(${direction * 720}deg)`;
+          flower.style.opacity = "0";
+        });
+      }, 1000);
+
+      // 3. Show Letter
+      setTimeout(() => {
+        document.getElementById("letter").classList.add("show");
+      }, 4000);
+
+      // 4. Letter Click Event
+      document.getElementById("letter").onclick = function () {
+        const letter = this;
+        const lovePage = document.getElementById("lovePage");
+
+        letter.style.transform = "translate(-50%, -50%) scale(2.5)";
+        letter.style.opacity = "0";
+        letter.style.pointerEvents = "none";
+
+        lovePage.classList.add("active");
+
+        const teddy = document.createElement("img");
+        teddy.src = "image/teddy.png";
+        teddy.classList.add("teddy");
+        document.body.appendChild(teddy);
+
+        // Shake effect
+        setTimeout(() => {
+          document.body.animate(
+            [
+              { transform: "translateX(0px)" },
+              { transform: "translateX(-6px)" },
+              { transform: "translateX(6px)" },
+              { transform: "translateX(0px)" },
+            ],
+            { duration: 180 },
+          );
+        }, 150);
+
+        teddy.style.animation = "teddyImpact 0.7s ease-out forwards";
+
+        setTimeout(() => {
+          teddy.style.animation =
+            "teddySlide 8s cubic-bezier(0.22, 1, 0.36, 1) forwards";
+
+          let progress = 100;
+          const reveal = setInterval(() => {
+            progress -= 2; // Slower, smoother reveal
+            lovePage.style.clipPath = `inset(0 0 ${progress}% 0)`;
+
+            if (progress <= 0) {
+              clearInterval(reveal);
+
+              // CRITICAL: Call the button function in love.html
+              try {
+                lovePage.contentWindow.showButton();
+              } catch (e) {
+                console.log(
+                  "Cross-origin blocked or function missing, but love.html has a fallback timer!",
+                );
+              }
+            }
+          }, 60);
+        }, 700);
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Someone Special ❤️</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      h1 {
+        color: #d81b60;
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+      }
+      input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border: 2px solid #f48fb1;
+        border-radius: 12px;
+        text-align: center;
+        font-size: 1.1rem;
+      }
+      button {
+        width: 100%;
+        padding: 14px;
+        background-color: #d81b60;
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      #message {
+        margin-top: 15px;
+        font-weight: bold;
+        min-height: 1.2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🌸 Welcome 🌸</h1>
+      <p>Enter the secret code</p>
+      <input type="password" id="password" placeholder="••••" />
+      <button onclick="checkPassword()">Unlock ❤️</button>
+      <p id="message"></p>
+    </div>
+
+    <script>
+      function checkPassword() {
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        // Set your password here
+        if (password === "busy") {
+          message.innerText = "Yay! You unlocked it! ❤️";
+          message.style.color = "#d81b60";
+
+          triggerKapuf();
+
+          // Wait 1.5 seconds for the hearts to finish before redirecting
+          setTimeout(() => {
+            window.location.href = "flower.html";
+          }, 1500);
+        } else {
+          message.innerText = "Oops, try again! 🌸";
+          message.style.color = "#880e4f";
+        }
+      }
+
+      function triggerKapuf() {
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.innerHTML = "❤️";
+          heart.style.position = "fixed";
+          heart.style.fontSize = "30px";
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.top = Math.random() * 100 + "vh";
+          heart.style.pointerEvents = "none";
+          heart.style.zIndex = "9999";
+          document.body.appendChild(heart);
+
+          heart.animate(
+            [
+              { transform: "scale(0) translateY(0)", opacity: 1 },
+              { transform: "scale(3) translateY(-150px)", opacity: 0 },
+            ],
+            {
+              duration: 1200,
+              easing: "cubic-bezier(0,0,0.2,1)",
+            },
+          ).onfinish = () => heart.remove();
+        }
+      }
+    </script>
+  </body>
+</html>

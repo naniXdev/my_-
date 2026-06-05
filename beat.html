@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Message</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #050506;
+        padding: 20px;
+        font-family: "Lato", sans-serif;
+        overflow-x: hidden;
+      }
+
+      .polaroid-card {
+        width: 100%;
+        max-width: 380px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background: radial-gradient(
+          circle at 50% 40%,
+          #5d151e 0%,
+          #420d13 60%,
+          #2a080d 100%
+        );
+        padding: 24px;
+        border-radius: 2px;
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.6),
+          0 0 100px rgba(93, 21, 30, 0.2);
+        animation: float 4s ease-in-out infinite;
+        transform-origin: center;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .polaroid-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.1;
+        background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      }
+
+      .photo-viewport {
+        width: 100%;
+        aspect-ratio: 1.05 / 1;
+        background: #000000;
+        position: relative;
+        overflow: hidden;
+        box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .photo-viewport img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+
+      .caption-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 25px;
+        padding: 0 5px;
+        color: #ffffff;
+        font-weight: 400;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+      }
+
+      .mini-white-heart {
+        width: 32px;
+        height: 32px;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+      }
+      .mini-white-heart path {
+        fill: #ffffff;
+      }
+
+      .birthday-message {
+        margin-top: 40px;
+        max-width: 450px;
+        color: #e0e0e0;
+        line-height: 1.6;
+        text-align: center;
+        font-size: clamp(0.85rem, 3vw, 1rem);
+        font-weight: 300;
+        opacity: 0.85;
+      }
+
+      /* --- Heart & Dark Golden Button Styles --- */
+      .heart {
+        position: absolute;
+        color: #d4af37; /* Gold hearts */
+        font-size: 30px;
+        animation: floatHeart 4s linear forwards;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-250px) scale(1.8);
+          opacity: 0;
+        }
+      }
+
+      #nextBtn {
+        margin-top: 40px;
+        padding: 12px 25px;
+        border-radius: 30px;
+        border: 1px solid #5d4037;
+        /* Dark Golden / Bronze Gradient */
+        background: linear-gradient(135deg, #8b4513, #b8860b);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        animation: pulse 1.5s infinite;
+        z-index: 2000;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 10px rgba(184, 134, 11, 0.3);
+        }
+        50% {
+          box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
+        }
+      }
+
+      @media (max-width: 400px) {
+        .polaroid-card {
+          width: 90vw;
+          padding: 15px;
+        }
+        .caption-row {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="polaroid-card">
+      <div class="photo-viewport">
+        <img src="image/me.png" alt="Portrait" />
+      </div>
+      <div class="caption-row">
+        <span>This diva, ur wiefy...</span>
+        <svg class="mini-white-heart" viewBox="0 0 200 200">
+          <path
+            d="M 100,60 C 100,22 42,18 42,66 C 42,112 76,136 100,166 C 124,136 158,112 158,66 C 158,18 100,22 100,60 Z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <div class="birthday-message">
+      Your gorgeous wife would like to wish you a very Happy Birthday and
+      officially inform you that she is sending unlimited hugs 🤗, countless
+      kisses 😘, and an unhealthy amount of love your way today. Any attempts to
+      reject these gifts 🔪 will be ignored and may result in additional kisses
+      being issued immediately.
+      <br /><br />
+      Enjoy your special day, handsome. You are loved more than words can say,
+      missed more than you know, and celebrated more than you realize. Now go
+      have the amazing birthday you deserve—and don't forget that your wife
+      loves you very, very much.🥳❤️
+    </div>
+
+    <button id="nextBtn">💖 Wanna know 💖</button>
+
+    <script>
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 90 + 5 + "vw";
+        heart.style.top = "90vh";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }
+      setInterval(createHeart, 300);
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        window.location.href = "year.html";
+      });
+    </script>
+  </body>
+</html>
