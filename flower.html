@@ -195,11 +195,11 @@
 
         setTimeout(() => {
           teddy.style.animation =
-            "teddySlide 8s cubic-bezier(0.22, 1, 0.36, 1) forwards";
+            "teddySlide 28s cubic-bezier(0.22, 1, 0.36, 1) forwards";
 
           let progress = 100;
           const reveal = setInterval(() => {
-            progress -= 2; // Slower, smoother reveal
+            progress -= 1; // Slower, smoother reveal
             lovePage.style.clipPath = `inset(0 0 ${progress}% 0)`;
 
             if (progress <= 0) {
